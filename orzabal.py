@@ -1,13 +1,14 @@
 import discord
-from discord.ext import commands
-import asyncio
 from secret import bot_secret
 
-orzabal = commands.Bot(command_prefix='!')
+while True:
+    intents = discord.Intents.default()
+    intents.message_content = True
 
-@orzabal.event
-async def on_ready():
-    print(f'Orzabal is ready! Logged in as {orzabal.user.name}')
+    client = discord.Client(intents=intents)
 
-orzabal.run(bot_secret)
+    @client.event
+    async def on_ready():
+        print(f'We have logged in as {client.user}')
 
+    client.run(bot_secret)
