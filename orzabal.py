@@ -20,6 +20,7 @@ async def on_ready():
     print(f'{bot.user} has entered {guild.name}. You may now commence the mayhem.')
     
     await morning_message()
+    await goodnight_message()
 
 @bot.event
 async def on_member_join(member):
@@ -40,12 +41,12 @@ async def send_morning_message():
     channel_id = 748224867085582425
     channel = bot.get_channel(channel_id)
     if channel:
-        await channel.send("Good morning, everyone! Let's rule the fucking world")
+        await channel.send("Good morning, everyone! Let's rule the fucking world.")
 
 async def morning_message():
     while True:
         now = datetime.datetime.now()
-        target_time = datetime.time(hour=9, minute=00)
+        target_time = datetime.time(hour=7, minute=45)
         target_datetime = datetime.datetime.combine(now.date(), target_time)
 
         if now.time() > target_time:
@@ -57,5 +58,27 @@ async def morning_message():
         await asyncio.sleep(seconds_until_target)
 
         await send_morning_message()
+
+async def send_goodnight_message():
+    channel_id = 748224867085582425
+    channel = bot.get_channel(channel_id)
+    if channel:
+        await channel.send("Make sure you drink some water and get a good night's sleep yall!")
+
+async def goodnight_message():
+    while True:
+        now = datetime.datetime.now()
+        target_time = datetime.time(hour=21, minute=0)
+        target_datetime = datetime.datetime.combine(now.date(), target_time)
+
+        if now.time() > target_time:
+            target_datetime += datetime.timedelta(days=1)
+
+        delta = target_datetime - now
+        seconds_until_target = delta.total_seconds()
+
+        await asyncio.sleep(seconds_until_target)
+
+        await send_goodnight_message()
 
 bot.run(TOKEN)
