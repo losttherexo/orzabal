@@ -1,2 +1,2 @@
 # Orzabal
-Discord bot for lost sound recording
+Discord bot for Lost Sound Recording Server
