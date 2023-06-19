@@ -1,7 +1,11 @@
+import os
 import discord
 import datetime
 import asyncio
-from secret import bot_secret
+from dotenv import load_dotenv
+
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -10,7 +14,7 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print(f'We have logged in as {client.user}')
+    print(f'{client.user} is in the building!')
     await morning_message()
 
 async def send_morning_message():
@@ -43,4 +47,4 @@ async def on_message(message):
         await message.author.send('hello my friend!')
 
 
-client.run(bot_secret)
+client.run(TOKEN)
