@@ -14,7 +14,7 @@ async def on_ready():
     await morning_message()
 
 async def send_morning_message():
-    channel_id = '748224867085582425'
+    channel_id = 748224867085582425
     channel = client.get_channel(channel_id)
     if channel:
         await channel.send("Good morning, everyone! Let's rule the fucking world")
@@ -22,7 +22,7 @@ async def send_morning_message():
 async def morning_message():
     while True:
         now = datetime.datetime.now()
-        target_time = datetime.time(hour=7, minute=45)  # Set the target time for the message
+        target_time = datetime.time(hour=9, minute=00)  # Set the target time for the message
         target_datetime = datetime.datetime.combine(now.date(), target_time)
 
         if now.time() > target_time:
@@ -38,8 +38,7 @@ async def morning_message():
 @client.event
 async def on_message(message):
     if message.author == client.user:
-        return  # Ignore messages sent by the bot itself
-
+        return
     if message.content == 'hello':
         await message.author.send('hello my friend!')
 
