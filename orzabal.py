@@ -32,7 +32,7 @@ async def on_message(message):
         return
 
     if bot.user.mentioned_in(message):
-        await message.channel.send("Hello! I'm a Discord bot.")
+        await message.channel.send("I am but a mere child and I need some time to grow yet the vibes I will provide.")
 
     await bot.process_commands(message)
 
