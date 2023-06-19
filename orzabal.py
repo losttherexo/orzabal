@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
+GUILD = os.getenv('DISCORD_GUILD')
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -14,7 +15,12 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print(f'{client.user} is in the building!')
+    for guild in client.guilds:
+        if guild.name == GUILD:
+            break
+    
+    print(f'{client.user} has entered {guild.name}. You may now commence the mayhem.')
+    
     await morning_message()
 
 async def send_morning_message():
