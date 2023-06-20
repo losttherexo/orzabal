@@ -13,15 +13,6 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-utc = datetime.timezone.utc
-times = [
-    datetime.time(hour=11, minute=45, tzinfo=utc),
-    datetime.time(hour=3, minute=15, tzinfo=utc)
-]
-
-morning_time = datetime.time(11, 45, 0)
-night_time = datetime.time(3, 15, 0)
-
 @bot.event
 async def on_ready():
     guild = discord.utils.get(bot.guilds, name=GUILD)
@@ -43,18 +34,18 @@ async def on_message(message):
 
     await bot.process_commands(message)
 
-@tasks.loop(time=times)
+@tasks.loop(minutes=1)
 async def send_daily_messages():
-    now = datetime.datetime.now().time()
-    print(f"Current time: {now}")
+    morning_time = datetime.time(9, 55, 0)
+    night_time = datetime.time(3, 15, 0)
+    now = datetime.datetime.now()
 
-    if now == morning_time:
+    if now.hour == morning_time.hour and now.minute == morning_time.minute:
         channel = bot.get_channel(748224867085582425)
-        await channel.send("Good morning yall!")
+        await channel.send("am i good dad?")
 
-    if now == night_time:
+    if now.hour == night_time.hour and now.minute == night_time.minute:
         channel = bot.get_channel(748224867085582425)
         await channel.send("Don't forget to drink water before bed tonight <3")
-
 
 bot.run(TOKEN)
