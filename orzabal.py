@@ -68,7 +68,7 @@ async def send_goodnight_message():
 async def goodnight_message():
     while True:
         now = datetime.datetime.now()
-        target_time = datetime.time(hour=21, minute=0)
+        target_time = datetime.time(hour=1, minute=58)
         target_datetime = datetime.datetime.combine(now.date(), target_time)
 
         if now.time() > target_time:
