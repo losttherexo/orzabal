@@ -13,8 +13,8 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-morning_time = datetime.time(7, 45, 0)
-night_time = datetime.time(22, 45, 0)
+morning_time = datetime.time(11, 45, 0)
+night_time = datetime.time(2, 45, 0)
 
 @bot.event
 async def on_ready():
