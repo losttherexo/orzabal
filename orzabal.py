@@ -13,8 +13,14 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+utc = datetime.timezone.utc
+times = [
+    datetime.time(hour=11, minute=45, tzinfo=utc),
+    datetime.time(hour=3, minute=15, tzinfo=utc)
+]
+
 morning_time = datetime.time(11, 45, 0)
-night_time = datetime.time(2, 45, 0)
+night_time = datetime.time(3, 15, 0)
 
 @bot.event
 async def on_ready():
@@ -37,7 +43,7 @@ async def on_message(message):
 
     await bot.process_commands(message)
 
-@tasks.loop(hours=24)
+@tasks.loop(time=times)
 async def send_daily_messages():
     now = datetime.datetime.now().time()
     print(f"Current time: {now}")
