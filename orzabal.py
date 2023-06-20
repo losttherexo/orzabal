@@ -1,6 +1,7 @@
 import os
 import discord
 import datetime
+import pytz
 from dotenv import load_dotenv
 from discord.ext import commands,tasks
 
@@ -22,7 +23,7 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     await member.create_dm()
-    await member.dm_channel.send(f'Hello {member.name}, welcome to the lab!')
+    await member.dm_channel.send(f'hello {member.name}, welcome to the lab!')
 
 @bot.event
 async def on_message(message):
@@ -30,22 +31,26 @@ async def on_message(message):
         return
 
     if bot.user.mentioned_in(message):
-        await message.channel.send("I am but a mere child and I need some time to grow yet the vibes I will provide.")
+        await message.channel.send("i am but a mere child and i need some time to grow yet the vibes i will provide.")
 
     await bot.process_commands(message)
 
-@tasks.loop(minutes=1)
+@tasks.loop(minutes=15)
 async def send_daily_messages():
-    morning_time = datetime.time(9, 55, 0)
-    night_time = datetime.time(3, 15, 0)
-    now = datetime.datetime.now()
+    est = pytz.timezone('US/Eastern') 
+    now = datetime.datetime.now(est)
+    
+    morning_time = datetime.time(7, 45, 0)
+    night_time = datetime.time(22, 45, 0)
+
+    print(now)
 
     if now.hour == morning_time.hour and now.minute == morning_time.minute:
         channel = bot.get_channel(748224867085582425)
-        await channel.send("am i good dad?")
+        await channel.send("good morrow brethren")
 
     if now.hour == night_time.hour and now.minute == night_time.minute:
         channel = bot.get_channel(748224867085582425)
-        await channel.send("Don't forget to drink water before bed tonight <3")
+        await channel.send("don't forget to drink water before bed tonight <3")
 
 bot.run(TOKEN)
