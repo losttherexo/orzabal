@@ -3,6 +3,7 @@ import discord
 import datetime
 import pytz
 import random
+import asyncio
 from dotenv import load_dotenv
 from discord.ext import commands,tasks
 
@@ -28,11 +29,23 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
-    if message.author == bot.user:
+    orzabal = bot.user
+    ty = ['thanks', 'ty', 'thx', 'muchas gracias', 'thank you', 'muy amable']
+
+    if message.author == orzabal:
         return
 
-    if bot.user.mentioned_in(message):
-        await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
+    if orzabal.mentioned_in(message):
+        async with message.channel.typing():
+            await asyncio.sleep(1.5)
+            await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
+
+    for phrase in ty:
+        if phrase in message.content.lower() and orzabal.mentioned_in(message):
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send('of course friend!')
+            break
 
     await bot.process_commands(message)
 
