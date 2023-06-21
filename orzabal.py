@@ -32,7 +32,7 @@ async def on_message(message):
         return
 
     if bot.user.mentioned_in(message):
-        await message.channel.send("i am but a mere child and i need some time to grow yet the vibes i will provide.")
+        await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
 
     await bot.process_commands(message)
 
