@@ -2,6 +2,7 @@ import os
 import discord
 import datetime
 import pytz
+import random
 from dotenv import load_dotenv
 from discord.ext import commands,tasks
 
@@ -43,14 +44,20 @@ async def send_daily_messages():
     morning_time = datetime.time(7, 45, 0)
     night_time = datetime.time(22, 45, 0)
 
-    print(now)
-
     if now.hour == morning_time.hour and now.minute == morning_time.minute:
         channel = bot.get_channel(748224867085582425)
-        await channel.send("good morrow brethren")
+        morning_message = get_random_message_from_file('messages/morning_message.txt')
+        await channel.send(morning_message)
+
 
     if now.hour == night_time.hour and now.minute == night_time.minute:
         channel = bot.get_channel(748224867085582425)
-        await channel.send("don't forget to drink water before bed tonight <3")
+        night_message = get_random_message_from_file('messages/night_message.txt')
+        await channel.send(night_message)
+
+def get_random_message_from_file(file_path):
+    with open(file_path, 'r') as file:
+        messages = file.readlines()
+    return random.choice(messages).strip()
 
 bot.run(TOKEN)
