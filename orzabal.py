@@ -51,7 +51,7 @@ async def on_message(message):
     
     await bot.process_commands(message)
 
-@tasks.loop(minutes=15)
+@tasks.loop(minutes=1)
 async def send_daily_messages():
     est = pytz.timezone('US/Eastern') 
     now = datetime.datetime.now(est)
