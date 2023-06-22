@@ -36,19 +36,20 @@ async def on_message(message):
     if message.author == orzabal:
         return
 
-    if orzabal.mentioned_in(message) and any(phrase in message.content.lower() for phrase in ty):
-        async with message.channel.typing():
-            await asyncio.sleep(1.5)
-            await message.channel.send('of course friend!')
-    elif orzabal.mentioned_in(message) and any(phrase in message.content.lower() for phrase in greetings):
-        async with message.channel.typing():
-            await asyncio.sleep(1.5)
-            await message.channel.send('hi friend!')
-    elif orzabal.mentioned_in(message):
-        async with message.channel.typing():
-            await asyncio.sleep(1.5)
-            await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
-    
+    if orzabal.mentioned_in(message):
+        if any(phrase in message.content.lower() for phrase in ty):
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send('Of course, friend!')
+        elif any(phrase in message.content.lower() for phrase in greetings):
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send('Hi, friend!')
+        else:
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send("I am but a mere child and I need some time to grow. Yet, the vibes I will provide.")
+        
     await bot.process_commands(message)
 
 @tasks.loop(minutes=1)
