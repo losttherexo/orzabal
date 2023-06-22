@@ -39,14 +39,11 @@ async def on_message(message):
         async with message.channel.typing():
             await asyncio.sleep(1.5)
             await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
-
-    for phrase in ty:
-        if phrase in message.content.lower() and orzabal.mentioned_in(message):
-            async with message.channel.typing():
-                await asyncio.sleep(1.5)
-                await message.channel.send('of course friend!')
-            break
-
+    elif any(phrase in message.content.lower() for phrase in ty) and orzabal.mentioned_in(message):
+        async with message.channel.typing():
+            await asyncio.sleep(1.5)
+            await message.channel.send('of course friend!')
+    
     await bot.process_commands(message)
 
 @tasks.loop(minutes=15)
