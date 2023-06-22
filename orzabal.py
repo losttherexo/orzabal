@@ -44,7 +44,7 @@ async def on_message(message):
         async with message.channel.typing():
             await asyncio.sleep(1.5)
             await message.channel.send('hi friend!')
-    else:
+    elif orzabal.mentioned_in(message):
         async with message.channel.typing():
             await asyncio.sleep(1.5)
             await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
