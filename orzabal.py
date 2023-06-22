@@ -32,6 +32,7 @@ async def on_message(message):
     orzabal = bot.user
     ty = ['thanks', 'ty', 'thx', 'muchas gracias', 'thank you', 'muy amable']
     greetings = ['hi', 'hello', 'buenos dias', 'good day', 'sup', 'whats up', 'hey', 'hola']
+    luv = ['luv u', 'love you', 'ily']
 
     if message.author == orzabal:
         return
@@ -40,15 +41,19 @@ async def on_message(message):
         if any(phrase in message.content.lower() for phrase in ty):
             async with message.channel.typing():
                 await asyncio.sleep(1.5)
-                await message.channel.send('Of course, friend!')
+                await message.channel.send('of course friend!')
         elif any(phrase in message.content.lower() for phrase in greetings):
             async with message.channel.typing():
                 await asyncio.sleep(1.5)
-                await message.channel.send('Hi, friend!')
+                await message.channel.send('hi friend!')
+        elif any(phrase in message.content.lower() for phrase in luv):
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send('ilym')
         else:
             async with message.channel.typing():
                 await asyncio.sleep(1.5)
-                await message.channel.send("I am but a mere child and I need some time to grow. Yet, the vibes I will provide.")
+                await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
         
     await bot.process_commands(message)
 
