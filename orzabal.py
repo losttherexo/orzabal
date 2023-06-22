@@ -31,6 +31,7 @@ async def on_member_join(member):
 async def on_message(message):
     orzabal = bot.user
     ty = ['thanks', 'ty', 'thx', 'muchas gracias', 'thank you', 'muy amable']
+    greetings = ['hi', 'hello', 'buenos dias', 'good day', 'sup', 'whats up', 'hey', 'hola']
 
     if message.author == orzabal:
         return
@@ -43,6 +44,10 @@ async def on_message(message):
         async with message.channel.typing():
             await asyncio.sleep(1.5)
             await message.channel.send('of course friend!')
+    elif any(phrase in message.content.lower() for phrase in greetings) and orzabal.mentioned_in(message):
+        async with message.channel.typing():
+            await asyncio.sleep(1.5)
+            await message.channel.send('hi friend!')
     
     await bot.process_commands(message)
 
