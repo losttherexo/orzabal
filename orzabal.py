@@ -31,25 +31,33 @@ async def on_member_join(member):
 async def on_message(message):
     orzabal = bot.user
     ty = ['thanks', 'ty', 'thx', 'muchas gracias', 'thank you', 'muy amable']
+    greetings = ['hi', 'hello', 'buenos dias', 'good day', 'sup', 'whats up', 'hey', 'hola']
+    luv = ['luv u', 'love you', 'ily']
 
     if message.author == orzabal:
         return
 
     if orzabal.mentioned_in(message):
-        async with message.channel.typing():
-            await asyncio.sleep(1.5)
-            await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
-
-    for phrase in ty:
-        if phrase in message.content.lower() and orzabal.mentioned_in(message):
+        if any(phrase in message.content.lower() for phrase in ty):
             async with message.channel.typing():
                 await asyncio.sleep(1.5)
                 await message.channel.send('of course friend!')
-            break
-
+        elif any(phrase in message.content.lower() for phrase in greetings):
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send('hi friend!')
+        elif any(phrase in message.content.lower() for phrase in luv):
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send('ilym')
+        else:
+            async with message.channel.typing():
+                await asyncio.sleep(1.5)
+                await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
+        
     await bot.process_commands(message)
 
-@tasks.loop(minutes=15)
+@tasks.loop(minutes=1)
 async def send_daily_messages():
     est = pytz.timezone('US/Eastern') 
     now = datetime.datetime.now(est)
