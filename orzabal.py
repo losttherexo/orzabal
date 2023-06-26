@@ -22,10 +22,6 @@ async def on_ready():
     print(f'{bot.user} has entered {guild.name}. You may now commence the mayhem.')
     send_daily_messages.start()
 
-    general = bot.get_channel(748224867085582425)
-    # update_message = "hello all, i have received a new update! if you use the command !stoic, i will give you a randomly selected quote from our ancient teachers of wisdom :)"
-    # await general.send(update_message)
-
 @bot.event
 async def on_member_join(member):
     await member.create_dm()
@@ -63,10 +59,10 @@ async def on_message(message):
 
 @bot.command()
 async def stoic(ctx):
-    # await ctx.trigger_typing()
-    # await asyncio.sleep(1.5)
-    stoic_message = get_random_message_from_file('messages/stoic_messages.txt')
-    await ctx.send(stoic_message)
+    async with ctx.typing():
+        await asyncio.sleep(1.5) 
+        stoic_message = get_random_message_from_file('messages/stoic.txt')
+        await ctx.send(stoic_message)
 
 @tasks.loop(minutes=1)
 async def send_daily_messages():
