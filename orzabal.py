@@ -23,8 +23,8 @@ async def on_ready():
     send_daily_messages.start()
 
     general = bot.get_channel(748224867085582425)
-    update_message = "hello all, i have received a new update! if you use the command !stoic, i will give you a randomly selected quote from our ancient teachers of wisdom :)"
-    await general.send(update_message)
+    # update_message = "hello all, i have received a new update! if you use the command !stoic, i will give you a randomly selected quote from our ancient teachers of wisdom :)"
+    # await general.send(update_message)
 
 @bot.event
 async def on_member_join(member):
