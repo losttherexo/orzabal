@@ -22,6 +22,11 @@ async def on_ready():
     print(f'{bot.user} has entered {guild.name}. You may now commence the mayhem.')
     send_daily_messages.start()
 
+async def announce_update(guild):
+    channel = discord.utils.get(guild.text_channels, name='general')
+    update_message = "hello all, i have received a new update! if you use the command !stoic, i will give you a randomly selected quote from our ancient teachers of wisdom :)"
+    await channel.send(update_message)
+
 @bot.event
 async def on_member_join(member):
     await member.create_dm()
@@ -56,6 +61,11 @@ async def on_message(message):
                 await message.channel.send("i am but a mere child and i need some time to grow. yet, the vibes i will provide.")
         
     await bot.process_commands(message)
+
+@bot.command()
+async def stoic(ctx):
+    stoic_message = get_random_message_from_file('messages/stoic.txt')
+    await ctx.send(stoic_message)
 
 @tasks.loop(minutes=1)
 async def send_daily_messages():
