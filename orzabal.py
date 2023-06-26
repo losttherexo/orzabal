@@ -63,8 +63,8 @@ async def on_message(message):
 
 @bot.command()
 async def stoic(ctx):
-    await ctx.trigger_typing()
-    await asyncio.sleep(1.5)
+    # await ctx.trigger_typing()
+    # await asyncio.sleep(1.5)
     stoic_message = get_random_message_from_file('messages/stoic_messages.txt')
     await ctx.send(stoic_message)
 
