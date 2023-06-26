@@ -31,7 +31,7 @@ async def on_member_join(member):
 async def on_message(message):
     orzabal = bot.user
     ty = ['thanks', 'ty', 'thx', 'muchas gracias', 'thank you', 'muy amable']
-    greetings = ['hi', 'hello', 'buenos dias', 'good day', 'sup', 'whats up', 'hey', 'hola']
+    greetings = [' hi ', ' hello ', 'buenos dias', 'good day', 'sup', 'whats up', ' hey ', ' hola ']
     luv = ['luv u', 'love you', 'ily']
 
     if message.author == orzabal:
