@@ -22,10 +22,9 @@ async def on_ready():
     print(f'{bot.user} has entered {guild.name}. You may now commence the mayhem.')
     send_daily_messages.start()
 
-async def announce_update(guild):
-    channel = discord.utils.get(guild.text_channels, name='general')
+    general = bot.get_channel(748224867085582425)
     update_message = "hello all, i have received a new update! if you use the command !stoic, i will give you a randomly selected quote from our ancient teachers of wisdom :)"
-    await channel.send(update_message)
+    await general.send(update_message)
 
 @bot.event
 async def on_member_join(member):
